@@ -1,4 +1,4 @@
-function [energy, means, std_devs] = otsu_m_a_energy(I, thresh, scenario)
+function [energy, means, std_devs] = otsu_ms_a_energy(I, thresh, scenario)
 
 mu_afg = 100;
 mu_abg = 100;
@@ -22,9 +22,9 @@ fg_energy = length(fg)*log(fg_std)+sum(d.*d)/(2*fg_std*fg_std);
 
 % Priors on the sizes of the foreground and background
 afg_d = (length(fg) - mu_afg);
-afg_energy = log(sig_afg) + (afg_d.*afg_d)/(2*sig_afg*sig_afg);
+afg_energy = (afg_d.*afg_d)/(2*sig_afg*sig_afg);
 abg_d = (length(bg) - mu_abg);
-abg_energy = log(sig_abg) + (abg_d.*abg_d)/(2*sig_abg*sig_abg);
+abg_energy = (abg_d.*abg_d)/(2*sig_abg*sig_abg);
 
 energy = bg_energy + fg_energy + afg_energy + abg_energy;
 means = [mean(bg), mean(fg)];
